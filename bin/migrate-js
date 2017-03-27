@@ -167,4 +167,4 @@ function performMigrations(direction) {
 const commandName = options.command || "up";
 if (!(commandName in commands)) abort(`unknown command "${commandName}"`);
 const command = commands[commandName];
-command.apply(this, options.args);
+command(options.args);
