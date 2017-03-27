@@ -26,19 +26,27 @@ Commands:
 
 ```
 
-## Programmatic usage
+## Usage
 
 ```javascript
 const Migrate = require("migrate");
+const mysql = require("mysql");
+
+const db = mysql.createConnection(/* insert your connection params */);
 
 const migrate = new Migrate({
     stateManager: "mysql",
     migrationsDirectory: process.join(__dirname, "migrations"),
+    db,
 });
 
-migrate.up().then((migrations) => {
-  console.log(`Successfully ran ${migrations.length} migrations`);
+migrate.up().then(() => {
+  console.log(`Successfully ran migrations`);
+  db.end();
 }).catch((err) => {
+  db.end();
   throw err;
 });
 ```
+
+See the examples folder for more.
