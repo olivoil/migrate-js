@@ -5,8 +5,11 @@
     "migrate",
     "migrations"
   ],
-  "description": "A migration tool.",
+  "description": "A migration tool for node.js",
   "main": "index",
+  "bin": {
+    "migrate-js": "./bin/migrate-js"
+  },
   "repository": "git://github.com/olivoil/migrate-js",
   "author": "Olivier Melcher <olivier.melcher@gmail.com>",
   "license": "MIT",
