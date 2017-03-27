@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+../../bin/migrate -t sql create add users table
+../../bin/migrate -t sql create blog posts table

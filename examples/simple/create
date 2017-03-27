@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+../../bin/migrate create add users
+../../bin/migrate create add blog posts

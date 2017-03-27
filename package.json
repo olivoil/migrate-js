@@ -1,0 +1,16 @@
+{
+  "name": "migrate-js",
+  "version": "0.0.1",
+  "keywords": [
+    "migrate",
+    "migrations"
+  ],
+  "description": "A migration tool.",
+  "main": "index",
+  "repository": "git://github.com/olivoil/migrate-js",
+  "author": "Olivier Melcher <olivier.melcher@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 4.3.2"
+  }
+}

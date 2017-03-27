@@ -1,0 +1,168 @@
+#!/usr/bin/env node
+
+'use strict';
+
+/**
+ * Module dependencies.
+ */
+
+const Migrate = require("../");
+const path = require("path");
+const fs = require("fs");
+
+/**
+ * Arguments.
+ */
+
+const args = process.argv.slice(2);
+
+/**
+ * Option defaults.
+ */
+
+const options = { args: [] };
+
+/**
+ * Usage information.
+ */
+
+const usage = [
+    ''
+  , '  Usage: migrate [options] [command]'
+  , ''
+  , '  Options:'
+  , ''
+  , '     -d, --migrations-dir <path> set the directory where migrations are created'
+  , '     --state-manager <name>      set state manager module to store state (default: none)'
+  , '     --template <name>           set template module to create new migrations with (default: simple)'
+  , '  Commands:'
+  , ''
+  , '     down            rollback all migrations'
+  , '     up              execute all migrations (the default command)'
+  , '     create [title]  create a new migration file with optional [title]'
+  , ''
+].join('\n');
+
+/**
+ * abort with a message.
+ */
+
+function abort(msg) {
+  console.error('  %s', msg);
+  process.exit(1);
+}
+
+/**
+ * require an argument.
+ */
+
+function required() {
+  if (args.length) return args.shift();
+  abort(arg + ' requires an argument');
+}
+
+/**
+ * parse arguments
+ */
+
+let arg;
+while (args.length) {
+  arg = args.shift();
+  switch (arg) {
+    case "-h":
+    case "--help":
+    case "help":
+      console.log(usage);
+      process.exit();
+      break;
+    case "-d":
+    case "--migrations-dir":
+      options.migrationsDirectory = require();
+      break;
+    case "-s":
+    case "--state-manager":
+      options.stateManager = required();
+      break;
+    case "-t":
+    case "--template":
+      options.template = required();
+      break;
+    default:
+      if (options.command) {
+        options.args.push(arg);
+      } else {
+        options.command = arg;
+      }
+  }
+}
+
+/**
+ * Log a keyed message.
+ */
+
+function log(key, msg) {
+  console.log("  \x1B[90m%s :\x1B[0m \x1B[36m%s\x1B[0m", key, msg);
+}
+
+/**
+ * commands
+ */
+
+const commands = {
+
+  /**
+   * up
+   */
+
+  up: function() {
+    performMigrations("up");
+  },
+
+  /**
+   * down
+   */
+
+  down: function() {
+    performMigrations("up");
+  },
+
+  /**
+   * create [title]
+   */
+
+  create: function(/* ...title */) {
+    const migrate = new Migrate(options);
+    migrate.create(Array.prototype.join.call(arguments, " "), options.template);
+  }
+};
+
+/**
+ * Perform migrations in the given `direction`.
+ *
+ * @param {String} direction
+ */
+
+function performMigrations(direction) {
+  const migrate = new Migrate(options);
+  
+  migrate.on("migration", (migration, direction) => {
+    log(direction, migration.file);
+  });
+  
+  migrate.up()
+  .then(() => {
+    log("migration", "complete");
+    process.exit(0);
+  })
+  .catch((err) => {
+    log("error", err);
+    process.exit(1);
+  });
+}
+
+// invoke command
+
+const commandName = options.command || "up";
+if (!(commandName in commands)) abort(`unknown command "${commandName}"`);
+const command = commands[commandName];
+command.apply(this, options.args);
