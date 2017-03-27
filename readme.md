@@ -9,20 +9,20 @@
 ## Usage
 
 ```
-Usage: migrate-js [options] [command]
+  Usage: migrate-js [options] [command]
 
-Options:
+  Options:
 
-   --migrations-dir <path>  set the location of migration files
-   --state-manager <name>   set state storage method ('mysql' or argument to 'require()')
-   --template <name>        set path to template file to use for new migrations
+     -h, --help                  display this help menu
+     -d, --migrations-dir <path> set the directory where migrations are created (default: ./migrations)
+     -s, --state-manager  <name> set state manager module to store state (default: none)
+     -t, --template       <name> set template module to create new migrations with (default: simple)
+     
+  Commands:
 
-Commands:
-
-   down             migrate down
-   up               migrate up (the default action)
-   create [title]   create a new migration file with optional [title]
-
+     down            rollback all migrations
+     up              execute all migrations (the default command)
+     create [title]  create a new migration file with optional [title]
 ```
 
 ## Usage
