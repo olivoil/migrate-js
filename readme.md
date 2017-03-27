@@ -4,24 +4,23 @@
 
 ## Installation
 
-    $ npm install nmigrate
+    $ npm install migrate-js
 
 ## Usage
 
 ```
-Usage: nmigrate [options] [command]
+Usage: migrate-js [options] [command]
 
 Options:
 
-   --migrations <path>      set the location of migration files
-   --storage <module-name>  set state storage method ('mysql' or argument to 'require()')
-   --template <module-name> set path to template file to use for new migrations
-   --date-format <format>   set a date format to use for new migration filenames
+   --migrations-dir <path>  set the location of migration files
+   --state-manager <name>   set state storage method ('mysql' or argument to 'require()')
+   --template <name>        set path to template file to use for new migrations
 
 Commands:
 
-   down   [name]    migrate down till given migration
-   up     [name]    migrate up till given migration (the default command)
+   down             migrate down
+   up               migrate up (the default action)
    create [title]   create a new migration file with optional [title]
 
 ```
