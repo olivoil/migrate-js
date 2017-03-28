@@ -1,12 +1,13 @@
 # migrate
 
-  Migration tool for node
+  A flexible migration tool for node usable both from the cli and programmatically.
+  It makes it easy to customize where to store state, and what template to use for migrations.
 
 ## Installation
 
     $ npm install migrate-js
 
-## Usage
+## Command-line use
 
 ```
   Usage: migrate-js [options] [command]
@@ -25,7 +26,9 @@
      create [title]  create a new migration file with optional [title]
 ```
 
-## Usage
+## Programmatic use
+
+See the examples folder for more, or check [https://runkit.com/olivoil/migrate-js](this live example).
 
 ```javascript
 const Migrate = require("migrate");
@@ -47,5 +50,3 @@ migrate.up().then(() => {
   throw err;
 });
 ```
-
-See the examples folder for more.
