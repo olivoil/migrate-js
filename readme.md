@@ -28,7 +28,7 @@
 
 ## Programmatic use
 
-See the examples folder for more, or check [https://runkit.com/olivoil/migrate-js](this live example).
+See the examples folder for more, or check [this live example](https://runkit.com/olivoil/migrate-js).
 
 ```javascript
 const Migrate = require("migrate");
