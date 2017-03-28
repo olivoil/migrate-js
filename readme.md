@@ -15,7 +15,7 @@
 
      -h, --help                  display this help menu
      -d, --migrations-dir <path> set the directory where migrations are created (default: ./migrations)
-     -s, --state-manager  <name> set state manager module to store state (default: none)
+     -s, --state-manager  <name> set state manager module to store state (default: json)
      -t, --template       <name> set template module to create new migrations with (default: simple)
      
   Commands:

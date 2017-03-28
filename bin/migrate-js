@@ -9,6 +9,7 @@
 const Migrate = require("../");
 const path = require("path");
 const fs = require("fs");
+const slice = Array.prototype.slice;
 
 /**
  * Arguments.
@@ -34,7 +35,7 @@ const usage = [
   , ''
   , '     -h, --help                  display this help menu'
   , '     -d, --migrations-dir <path> set the directory where migrations are created (default: ./migrations)'
-  , '     -s, --state-manager  <name> set state manager module to store state (default: none)'
+  , '     -s, --state-manager  <name> set state manager module to store state (default: json)'
   , '     -t, --template       <name> set template module to create new migrations with (default: simple)'
   , ''
   , '  Commands:'
@@ -125,16 +126,19 @@ const commands = {
    */
 
   down: function() {
-    performMigrations("up");
+    performMigrations("down");
   },
 
   /**
    * create [title]
    */
 
-  create: function(/* ...title */) {
+  create: function(title) {
     const migrate = new Migrate(options);
-    migrate.create(Array.prototype.join.call(arguments, " "), options.template);
+    if (Array.isArray(title)) {
+      return migrate.create(title.join(" "));
+    }
+    migrate.create(title);
   }
 };
 
@@ -148,10 +152,10 @@ function performMigrations(direction) {
   const migrate = new Migrate(options);
   
   migrate.on("migration", (migration, direction) => {
-    log(direction, migration.file);
+    log(direction, migration.title);
   });
   
-  migrate.up()
+  return migrate[direction]()
   .then(() => {
     log("migration", "complete");
     process.exit(0);

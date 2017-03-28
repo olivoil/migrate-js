@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+
+const Migrate = require("../../");
+
+const migrate = new Migrate();
+
+migrate.defined().then((list) => {
+  console.log(list.migrations);
+}).catch((err) => {
+  console.log("error", err, err.stack);
+});
