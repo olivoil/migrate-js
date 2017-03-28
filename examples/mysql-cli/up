@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+../../bin/migrate-js --state-manager mysql \
+                     --mysql-host localhost \
+                     --mysql-port 3306 \
+                     --mysql-database migrate_test \
+                     --mysql-user root \
+                     up

@@ -38,6 +38,13 @@ const usage = [
   , '     -s, --state-manager  <name> set state manager module to store state (default: json)'
   , '     -t, --template       <name> set template module to create new migrations with (default: simple)'
   , ''
+  , '  If set-manager is set to "mysql", you may specify the following options:'
+  , ''
+  , '     --mysql-host         <host> set host for mysql connection.'
+  , '     --mysql-port         <port> set port for mysql connection.'
+  , '     --mysql-database     <name> set database for mysql connection.'
+  , '     --mysql-user         <name> set user for mysql connection.'
+  , ''
   , '  Commands:'
   , ''
   , '     down            rollback all migrations'
@@ -90,6 +97,22 @@ while (args.length) {
     case "--template":
       options.template = required();
       break;
+    case "--mysql-host":
+      options.mysql = options.mysql || {};
+      options.mysql.host = required();
+      break;
+    case "--mysql-port":
+      options.mysql = options.mysql || {};
+      options.mysql.port = required();
+      break;
+    case "--mysql-database":
+      options.mysql = options.mysql || {};
+      options.mysql.database = required();
+      break;
+    case "--mysql-user":
+      options.mysql = options.mysql || {};
+      options.mysql.user = required();
+      break;
     default:
       if (options.command) {
         options.args.push(arg);
@@ -135,10 +158,13 @@ const commands = {
 
   create: function(title) {
     const migrate = new Migrate(options);
-    if (Array.isArray(title)) {
-      return migrate.create(title.join(" "));
+    
+    let t = title;
+    if (Array.isArray(t)) {
+      t = t.join(" ");
     }
-    migrate.create(title);
+    
+    return migrate.create(t);
   }
 };
 

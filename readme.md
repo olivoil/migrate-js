@@ -39,7 +39,7 @@ const db = mysql.createConnection(/* insert your connection params */);
 const migrate = new Migrate({
     stateManager: "mysql",
     migrationsDirectory: process.join(__dirname, "migrations"),
-    db,
+    mysql: db,
 });
 
 migrate.up().then(() => {
