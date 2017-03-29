@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 
-../../bin/migrate-js -t sql create add users table
-../../bin/migrate-js -t sql create blog posts table
+../../bin/migrate-js -t mysql create add users table
+../../bin/migrate-js -t mysql create blog posts table
