@@ -15,5 +15,8 @@
   "license": "MIT",
   "engines": {
     "node": ">= 4.3.2"
+  },
+  "devDependencies": {
+    "mysql": "^2.13.0"
   }
 }

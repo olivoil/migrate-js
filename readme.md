@@ -7,7 +7,7 @@
 
     $ npm install migrate-js
 
-## Command-line use
+## Usage
 
 ```
   Usage: migrate-js [options] [command]
@@ -26,7 +26,7 @@
      create [title]  create a new migration file with optional [title]
 ```
 
-## Programmatic use
+## Programmatic usage
 
 See the examples folder for more, or check [this live example](https://runkit.com/olivoil/migrate-js).
 

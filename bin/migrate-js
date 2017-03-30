@@ -7,9 +7,6 @@
  */
 
 const Migrate = require("../");
-const path = require("path");
-const fs = require("fs");
-const slice = Array.prototype.slice;
 
 /**
  * Arguments.
