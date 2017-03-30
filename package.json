@@ -16,6 +16,10 @@
   "engines": {
     "node": ">= 4.3.2"
   },
+  "scripts": {
+    "patch": "npm version patch -m 'bump version to %s'",
+    "postversion": "git push && git push --tags"
+  },
   "devDependencies": {
     "mysql": "^2.13.0"
   }
