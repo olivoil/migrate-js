@@ -22,5 +22,8 @@
   },
   "devDependencies": {
     "mysql": "^2.13.0"
+  },
+  "dependencies": {
+    "migrate-js": "^0.0.7"
   }
 }

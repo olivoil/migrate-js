@@ -7,6 +7,7 @@
  */
 
 const Migrate = require("../");
+const pkg = require("../package.json");
 
 /**
  * Arguments.
@@ -26,14 +27,20 @@ const options = { args: [] };
 
 const usage = [
     ''
+  , '  migrate-js'
+  , '  version ' + pkg.version
+  , ''
+  , '  ' + pkg.description
+  , ''
   , '  Usage: migrate-js [options] [command]'
   , ''
   , '  Options:'
   , ''
   , '     -h, --help                  display this help menu'
+  , '     -v, --version               display version number'
   , '     -d, --migrations-dir <path> set the directory where migrations are created (default: ./migrations)'
-  , '     -s, --state-manager  <name> set state manager module to store state (default: json)'
-  , '     -t, --template       <name> set template module to create new migrations with (default: simple)'
+  , '     -s, --state-manager  <name> set state manager module to store state (default: json, available: json, mysql, none)'
+  , '     -t, --template       <name> set template module to create new migrations with (default: simple, available: simple, mysql)'
   , ''
   , '  If set-manager is set to "mysql", you may specify the following options:'
   , ''
@@ -80,6 +87,12 @@ while (args.length) {
     case "--help":
     case "help":
       console.log(usage);
+      process.exit();
+      break;
+    case "-v":
+    case "--version":
+    case "version":
+      console.log(pkg.version);
       process.exit();
       break;
     case "-d":
